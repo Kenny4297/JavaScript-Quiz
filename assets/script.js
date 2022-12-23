@@ -1,4 +1,14 @@
 class JavaScriptQuiz {
+
+    // var questions = [
+    //     {
+    //         questions: "xxxxxxx",
+    //         answers: [
+    //             { text: "xxxxxx", isCorrect: true }
+    //         ]
+    //     }
+    // ]
+
     constructor() {}
         questions = {
             question1: "In what decade was Javascript invented?",
@@ -43,15 +53,10 @@ class JavaScriptQuiz {
             choice4: "Tesla"
         };
 
-        // answers = {
-        //     firstQuestion: "c3",
-        //     secondQuestion: "c3",
-        //     thirdQuestion: "c2",
-        //     fourthQuestion: "c4",
-        //     fifthQuestion: "c1"
-        // };
-        
-}
+        answerArray = ["1990", "for...while", "if...then statements", ".toUppercase()", "V8"]
+    };
+
+
 
 const quiz = new JavaScriptQuiz();
 
@@ -73,7 +78,11 @@ startGame.addEventListener('click', () => {
     homePage.style.display = 'none';
     questionPage.style.display = 'flex';
     firstQuestionPage();
-})
+});
+
+pageCount = 0;
+answerArray = 0;
+
 
 const firstQuestionPage = () => {
     questionTitle.innerText = quiz.questions.question1;
@@ -82,17 +91,18 @@ const firstQuestionPage = () => {
     q3.innerText = quiz.firstQuestionChoices.choice3;
     q4.innerText = quiz.firstQuestionChoices.choice4;
 
-    choicesArray.forEach(choice => {
-        console.log(choice);
-        choice.addEventListener('click', () => {
-            if (choice.id === "c2") {
+    for (let i = 0; i < choicesArray.length; i++) {
+        choicesArray[i].addEventListener('click', (event) => {
+            console.log(event.target.id)
+            if (choicesArray[i].id === "c2") {
                 console.log("Test passed!")
                 secondQuestionPage();
             } else {
-                console.log("nope")
+                console.log("nope, try again!")
+                // secondQuestionPage();
             }
         })
-    });
+    }
 };
 
 const secondQuestionPage = () => {
@@ -103,13 +113,15 @@ const secondQuestionPage = () => {
     q4.innerText = quiz.secondQuestionChoices.choice4;
 
     choicesArray.forEach(choice => {
-        console.log(choice);
+        // console.log(choice);
         choice.addEventListener('click', () => {
             if (choice.id === "c3") {
                 console.log("Test passed!")
                 thirdQuestionPage();
             } else {
                 console.log("nope")
+                // thirdQuestionPage();
+
             }
         })
     });
@@ -123,13 +135,15 @@ const thirdQuestionPage = () => {
     q4.innerText = quiz.thirdQuestionChoices.choice4;
 
     choicesArray.forEach(choice => {
-        console.log(choice);
+        // console.log(choice);
         choice.addEventListener('click', () => {
             if (choice.id === "c2") {
                 console.log("Test passed!")
                 fourthQuestionPage();
             } else {
                 console.log("nope")
+                // fourthQuestionPage();
+
             }
         })
     });
@@ -143,17 +157,18 @@ const fourthQuestionPage = () => {
     q4.innerText = quiz.fourthQuestionChoices.choice4;
 
     choicesArray.forEach(choice => {
-        console.log(choice);
+        // console.log(choice);
         choice.addEventListener('click', () => {
             if (choice.id === "c4") {
                 console.log("Test passed!")
                 fifthQuestionPage();
             } else {
                 console.log("nope")
+                // fifthQuestionPage();
             }
         })
     });
-}
+};
 
 const fifthQuestionPage = () => {
     questionTitle.innerText = quiz.questions.question5;
@@ -163,9 +178,9 @@ const fifthQuestionPage = () => {
     q4.innerText = quiz.fifthQuestionChoices.choice4;
 
     choicesArray.forEach(choice => {
-        console.log(choice);
+        // console.log(choice);
         choice.addEventListener('click', () => {
-            if (choice.id === "c1") {
+            if (this.id === "c1") {
                 console.log("Test passed!")
                 fifthQuestionPage();
             } else {
@@ -173,7 +188,7 @@ const fifthQuestionPage = () => {
             }
         })
     });
-}
+};
 
 
 
