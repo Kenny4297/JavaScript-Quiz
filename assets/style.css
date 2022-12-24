@@ -1,50 +1,25 @@
-#home {
-    display: block;
-}
-
-#home {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /* width: 500px; */
-}
-
 #section {
     display: flex;
-    justify-content: center;
-}
-
-#page {
-    display: none;
     flex-direction: column;
-    align-items: center;
-    border: 2px solid red;
-    width: 80%;
     margin: 0 auto;
+    justify-content: center;
+    outline: 2px solid green;
 }
 
-#button-section {
-    /* border: 2px solid purple; */
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-}
-
-#button-section p {
-    /* border: 2px solid green; */
-    color: green;
+#title {
+    border: 2px solid blue;
     text-align: center;
-    /* height: 30px; */
-    font-size: 20px;
 }
 
 button {
-    margin: 10px;
-    border-radius: 5px;
-    cursor: pointer;
+    outline: 3px solid red;
+    justify-content: center;
+    width: 20%;
+    margin: 0 auto;
+    color: blue;
+    
 }
 
-button:hover {
-    background-color: lightblue;
+button p {
+    margin: 0 auto;
 }
