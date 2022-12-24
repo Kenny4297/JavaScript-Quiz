@@ -44,6 +44,15 @@ title.innerText = "JavaScript Quiz"
 paragraph.innerText = "This is a javascript quiz"
 
 
+// element.classList.add("mystyle")
+
+const startGame = () => {
+    //Make the home page hidden
+    //Bring up timer
+
+}
+
+
 
 
 
