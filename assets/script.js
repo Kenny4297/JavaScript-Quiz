@@ -32,61 +32,81 @@ class Quiz {
             rightAnswer: "V8"
         },
     ]
+
+    nextQuestion = () => {
+        section.style.display = 'flex';
+
+        title.innerText = this.questions[count].question;
+        // console.log(`The question is: ${quiz.questions[count].question}`);
+    
+        q1.innerText = this.questions[count].answers[0]
+        q2.innerText = this.questions[count].answers[1]
+        q3.innerText = this.questions[count].answers[2]
+        q4.innerText = this.questions[count].answers[3]
+        // console.log(`The correct answer is: ${quiz.questions[count].rightAnswer}`)
+    
+            // FOR EACH LOOP
+        buttonArray.forEach((button) => {
+            // console.log("This automatically loops 4 times")
+            button.addEventListener('click', (event) => {
+                if (event.target.textContent == this.questions[count].rightAnswer) {
+                    console.log("Yes!")
+                    count++
+                    return this.nextQuestion();
+                } else {
+                    console.log("nope")
+                }
+            })
+        })
+    };
 };
 
 const quiz = new Quiz();
 
-//=====Home page of quiz=======
+const quizSection = document.getElementById("section");
+const startGameButton = document.querySelector("#start-game-button");
+const homePageSection = document.querySelector("#home-page");
+const highScoresPage = document.querySelector("high-scores");
 
-title.innerText = "JavaScript Quiz"
+//First page 
+quizSection.style.display = 'none';
 
-//Create a <p> where it explains what the quiz is all about
-paragraph.innerText = "This is a javascript quiz"
+// title.innerText = "Javascript Quiz"
+// paragraph.innerText = "This is a javascript quiz, and here are the instructions"
 
+startGameButton.addEventListener('click', () => {
+    quizSection.style.display = 'flex';
+    homePageSection.style.display = 'none'
+    quiz.nextQuestion();
+})
 
-// element.classList.add("mystyle")
-
-const startGame = () => {
-    //Make the home page hidden
-    //Bring up timer
-
-}
-
-
-
-
-
-//=====game first page===== 
 count = 0;
+score = 0;
 loopCount = 0;
-// numberOfQuestions = 5;
 const buttonArray = document.querySelectorAll("button");
 
-const nextQuestion = () => {
-    title.innerText = quiz.questions[count].question;
-    // console.log(`The question is: ${quiz.questions[count].question}`);
+// quiz.nextQuestion();
 
-    q1.innerText = quiz.questions[count].answers[0]
-    q2.innerText = quiz.questions[count].answers[1]
-    q3.innerText = quiz.questions[count].answers[2]
-    q4.innerText = quiz.questions[count].answers[3]
-    // console.log(`The correct answer is: ${quiz.questions[count].rightAnswer}`)
-
-        // FOR EACH LOOP
-    buttonArray.forEach((button) => {
-        // console.log("This automatically loops 4 times")
-        button.addEventListener('click', (event) => {
-            if (event.target.textContent == quiz.questions[count].rightAnswer) {
-                console.log("Yes!")
-                count++
-                return nextQuestion();
-            } 
-        })
-    })
-};
-nextQuestion();
+// const q1 = document.getElementById("q1");
+// const q2 = document.getElementById("q2");
+// const q3 = document.getElementById("q3");
+// const q4 = document.getElementById("q4");
+// const title = document.getElementById("title");
 
 
+//When the user hits start game from the home page, the first page is loaded. Each question page will be equivalent to each question object. (page 1 = question 1)
+
+// Loop through the class and only show the first question and the first answers
+
+// Add a check to see if the question selected was the correct one
+
+// 
+
+// numberOfQuestions = 5;
+
+
+
+// nextQuestion();
 
 
 
