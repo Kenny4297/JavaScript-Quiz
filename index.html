@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <script src="./script.js" type="text/javascript" defer></script>
+    <link rel="stylesheet" href="./assets/style.css">
+    <script src="./assets/script.js" type="text/javascript" defer></script>
     <title>JavaScript Quiz web lab </title>
 </head>
 <body>
@@ -13,9 +13,15 @@
     <section id="home-page">
         <h1 class="home-h1">Javascript Quiz</h1>
 
-        <p>This is where the description of the class will go</p>
+        <p>Welcome to the Ultimate JavaScript quiz1 Can you answer five questions regarding JavaScript within 60 second</p>
+        
+        <p>Any incorrect answers will doc your score by 10 seconds, so think carefully</p>
 
-        <button id="start-game-button">Start game!</button>
+        <button id="start-game-button">Start game</button>
+
+        <button id="high-scores-button">High Scores</button>
+
+
     </section>
 
     <!-- Quiz Section -->
@@ -30,13 +36,24 @@
         <button id="q3" class="button"></button>
         <button id="q4" class="button"></button>
 
+        <p id="score"></p>
+
     </section>
 
     <!-- High Scores Section? -->
-    <section class="high-scores">
+    <section id="high-scores">
         <h1>High Scores!</h1>
+
+        <h3>Top scores: </h3>
         
-        <input type="text"><p>Add your name here!</p>
+       <p>Add your name here! <input type="text"></p>
+    </section>
+
+    <!-- End Page section -->
+    <section id="end-page">
+        <h1>Well done!</h1>
+
+        <p>This is your score:</p>
     </section>
 
 </body>
