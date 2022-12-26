@@ -33,30 +33,49 @@ class Quiz {
         },
     ]
 
-    nextQuestion = () => {
+    updateQuestion = () => {
+        if (count === 5 ) {
+            return this.endPage();
+        }
+        rightOrWrong.style.display = 'none';
+        scoreDisplay.innerText = `Current score: ${score}`;
+
         title.innerText = this.questions[count].question;
-        // console.log(`The question is: ${quiz.questions[count].question}`);
     
         q1.innerText = this.questions[count].answers[0]
         q2.innerText = this.questions[count].answers[1]
         q3.innerText = this.questions[count].answers[2]
         q4.innerText = this.questions[count].answers[3]
-        // console.log(`The correct answer is: ${quiz.questions[count].rightAnswer}`)
-    
-        // FOR EACH LOOP
+    };
+
+    nextQuestion = () => {
         buttonArray.forEach((button) => {
-            // console.log("This automatically loops 4 times")
             button.addEventListener('click', (event) => {
                 if (event.target.textContent === this.questions[count].rightAnswer) {
-                    console.log("Check")
+                    console.log("Correct")
                     count++
                     score += 10
                     scoreDisplay.innerText = `Current score: ${score}`;
                     console.log(`This is the current score: ${score}`);
-                    return this.nextQuestion();
-                } else if (event.target.textContent !== this.questions[count].rightAnswer) {
+                    rightOrWrong.style.display = 'block';
+                    rightOrWrong.style.color = "darkgreen";
+                    rightOrWrong.innerText = "Correct!"
+                    event.target.style.backgroundColor = "darkgreen";
+                    setTimeout(() => {
+                        event.target.style.backgroundColor = "purple";
+                        this.updateQuestion();
+                    }, 1000);
+                } else {
                     console.log("wrong answer")
-                    return;
+                    count++
+                    rightOrWrong.style.display = 'block';
+                    rightOrWrong.style.color = "darkred"
+                    rightOrWrong.innerText = "Wrong!";
+                    event.target.style.backgroundColor = "darkred";
+                    setTimeout(() => {
+                        event.target.style.backgroundColor = "purple";
+                        this.updateQuestion();
+                    }, 1000);
                 }
             })
         })
@@ -77,6 +96,7 @@ const highScoresPage = document.querySelector("#high-scores");
 const highScoresButton = document.getElementById("high-scores-button");
 const scoreDisplay = document.getElementById("score");
 const endPageDisplay = document.getElementById("end-page");
+const rightOrWrong = document.getElementById("right-or-wrong");
 
 const buttonArray = document.querySelectorAll("button")
 
@@ -93,6 +113,7 @@ quizSection.style.display = 'none';
 startGameButton.addEventListener('click', () => {
     homePageSection.style.display = "none"
     quizSection.style.display = 'flex';
+    quiz.updateQuestion();
     quiz.nextQuestion();
 })
 
@@ -102,6 +123,12 @@ highScoresButton.addEventListener('click', () => {
     highScoresPage.style.display = 'flex';
     console.log("high scores check")
 });
+
+// Game starts
+//StartGameButton starts the game
+
+
+
 
 
 
