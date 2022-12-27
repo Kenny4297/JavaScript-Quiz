@@ -96,24 +96,11 @@ class Quiz {
         endPageDisplay.style.display = "flex";
         document.getElementById("finalScore").innerHTML = score;
 
-        highScoreSubmitButton.addEventListener('click', () => {
-            //This displays the value 
-            topScores.innerText = highScoresInput.value;
-        });
-
-        //Checks to see if the current score is greater then the lowest score in the "high Scores Object"
-        if (score > this.LowestHighScore()) {
-            highScoreRecord.style.display = 'flex';
-    // topScores.innerText = highScoresInput.value;
-            highScoreSubmitButton.addEventListener('click', () => {
-                highScoresObject[highScoresInput] = score;
-            })
-            console.log(highScoresObject);
-        }
     }
 
     goBack = () => {
         highScoresPage.style.display = 'none';
+        endPageDisplay.style.display = "none";
         homePageSection.style.display = 'flex';
     }
 
@@ -179,6 +166,24 @@ Array.from(goBackButtonArray).forEach((button) => {
         quiz.goBack();
     })
 })
+
+// Adding to local storage
+let totalScore = [];
+
+const addScore = (event) => {
+    event.preventDefault();
+    let score = {
+        playerName: document.getElementById("name").value,
+        score: document.getElementById("score").value
+    }
+    totalScore.push(score);
+    console.log(score);
+
+    localStorage.setItem("MyScores", JSON.stringify(totalScore));
+    console.log(`local storage: ${localStorage.getItem("MyScores")}`)
+}
+
+document.getElementById("btn").addEventListener('click', addScore);
 
 
 
