@@ -97,10 +97,16 @@ button p {
     border: 3px solid white;
 }
 
-
-
 #end-page {
     display: none;
     flex-direction: column;
-     text-align: center;
+    text-align: center;
+    color: white;
+
+}
+
+#score {
+    color: white;
+    border: 2px solid red;
+    font-size: 20px;;
 }

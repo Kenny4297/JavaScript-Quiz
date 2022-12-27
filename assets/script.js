@@ -64,7 +64,7 @@ class Quiz {
                     setTimeout(() => {
                         event.target.style.backgroundColor = "purple";
                         this.updateQuestion();
-                    }, 1000);
+                    }, );
                 } else {
                     console.log("wrong answer")
                     count++
@@ -75,7 +75,7 @@ class Quiz {
                     setTimeout(() => {
                         event.target.style.backgroundColor = "purple";
                         this.updateQuestion();
-                    }, 1000);
+                    }, );
                 }
             })
         })
@@ -84,6 +84,12 @@ class Quiz {
     endPage = () => {
         quizSection.style.display = "none";
         endPageDisplay.style.display = "flex";
+        document.getElementById("finalScore").innerHTML = score;
+    }
+
+    goBack = () => {
+        highScoresPage.style.display = 'none';
+        homePageSection.style.display = 'flex';
     }
 };
 
@@ -97,13 +103,21 @@ const highScoresButton = document.getElementById("high-scores-button");
 const scoreDisplay = document.getElementById("score");
 const endPageDisplay = document.getElementById("end-page");
 const rightOrWrong = document.getElementById("right-or-wrong");
+const highScoresInput = document.getElementById("high-scores-input");
+const finalScore = document.getElementById("finalScore");
+const topScores = document.getElementById("top-scores");
+const highScoreSubmitButton = document.getElementById("high-score-submit-button");
+const goBackButton = document.getElementById("go-back-button");
 
-const buttonArray = document.querySelectorAll("button")
+// document.getElementById('textbox_id').value to get the value of desired box
+
+const buttonArray = document.querySelectorAll("button");
 
 //First page 
 
 count = 0;
 score = 0;
+highScoresArray = [];
 
 quizSection.style.display = 'none';
 
@@ -118,11 +132,27 @@ startGameButton.addEventListener('click', () => {
 })
 
 highScoresButton.addEventListener('click', () => {
-    console.log(homePageSection);
+    // console.log(homePageSection);
     homePageSection.style.display = 'none';
     highScoresPage.style.display = 'flex';
-    console.log("high scores check")
+    console.log("high scores check");
 });
+
+highScoreSubmitButton.addEventListener('click', () => {
+    //This displays the value 
+    topScores.innerText = highScoresInput.value;
+    if (highScoresInput.value > Math.min(...highScoresArray)) {
+        highScoresArray.push(highScoresInput.value)
+    }
+});
+
+goBackButton.addEventListener('click', () => {
+    quiz.goBack();
+
+})
+
+
+
 
 // Game starts
 //StartGameButton starts the game
