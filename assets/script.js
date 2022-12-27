@@ -34,6 +34,7 @@ class Quiz {
     ]
 
     updateQuestion = () => {
+        // console.log(count);
         if (count === 5 ) {
             return this.endPage();
         }
@@ -49,6 +50,7 @@ class Quiz {
     };
 
     nextQuestion = () => {
+        console.log(`Count count from "nextQuestion": ${count}`)
         Array.from(buttonArray).forEach((button) => {
             button.addEventListener('click', (event) => {
                 if (event.target.textContent === this.questions[count].rightAnswer) {
@@ -64,8 +66,8 @@ class Quiz {
                     setTimeout(() => {
                         event.target.style.backgroundColor = "purple";
                         if (count === 5) {
-                            event.stopImmediatePropagation();
-                            event.preventDefault();
+                            // event.stopImmediatePropagation();
+                            // event.preventDefault();
                             return this.endPage();
                         }
                         this.updateQuestion();
@@ -92,10 +94,17 @@ class Quiz {
     };
 
     endPage = () => {
+        // Array.from(goBackButtonArray).forEach((button) => {
+        //     console.log("event listener button back check")
+        //     button.addEventListener('click', (event) => {
+        //         quiz.goBack();
+        //         event.preventDefault();
+        //     })
+        // })
         quizSection.style.display = "none";
         endPageDisplay.style.display = "flex";
         document.getElementById("finalScore").innerHTML = score;
-
+        count = 0;
     }
 
     goBack = () => {
@@ -106,7 +115,7 @@ class Quiz {
 
     LowestHighScore = () => {
         let individualHighScores = Object.values(highScoresObject);
-        let minHighScore = Math.min(...individualHighScores)
+        let minHighScore = Math.min(...individualHighScores);
         return minHighScore;
     }
 };
@@ -128,9 +137,6 @@ const highScoreSubmitButton = document.getElementById("high-score-submit-button"
 const addHighScorePrompt = document.getElementById("add-high-score-prompt");
 const highScoreRecord = document.getElementById("high-score-record");
 
-
-// document.getElementById('textbox_id').value to get the value of desired box
-
 const buttonArray = document.getElementsByClassName("button");
 const goBackButtonArray = document.getElementsByClassName("go-back-button");
 
@@ -145,7 +151,8 @@ quizSection.style.display = 'none';
 // title.innerText = "Javascript Quiz"
 // paragraph.innerText = "This is a javascript quiz, and here are the instructions"
 
-startGameButton.addEventListener('click', () => {
+startGameButton.addEventListener('click', (event) => {
+    count = 0;
     homePageSection.style.display = "none"
     quizSection.style.display = 'flex';
     quiz.updateQuestion();
@@ -153,12 +160,11 @@ startGameButton.addEventListener('click', () => {
 })
 
 highScoresButton.addEventListener('click', () => {
-    // console.log(homePageSection);
+    console.log("high scores button event listener check")
     homePageSection.style.display = 'none';
     highScoresPage.style.display = 'flex';
     console.log("high scores check");
 });
-
 
 Array.from(goBackButtonArray).forEach((button) => {
     console.log("event listener button back check")
