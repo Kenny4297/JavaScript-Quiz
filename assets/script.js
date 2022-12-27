@@ -113,7 +113,6 @@ class Quiz {
     }
 
     goBack = () => {
-        console.log("go back button check")
         highScoresPage.style.display = 'none';
         homePageSection.style.display = 'flex';
     }
@@ -146,7 +145,7 @@ const highScoreRecord = document.getElementById("high-score-record");
 // document.getElementById('textbox_id').value to get the value of desired box
 
 const buttonArray = document.getElementsByClassName("button");
-const goBackButtonArray = document.querySelectorAll("go-back-button");
+const goBackButtonArray = document.getElementsByClassName("go-back-button");
 
 //First page 
 
@@ -174,7 +173,7 @@ highScoresButton.addEventListener('click', () => {
 });
 
 
-goBackButtonArray.forEach((button) => {
+Array.from(goBackButtonArray).forEach((button) => {
     console.log("event listener button back check")
     button.addEventListener('click', () => {
         quiz.goBack();
