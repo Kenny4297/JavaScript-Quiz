@@ -53,6 +53,7 @@ class Quiz {
         console.log(`Count count from "nextQuestion": ${count}`)
         Array.from(buttonArray).forEach((button) => {
             button.addEventListener('click', (event) => {
+                console.log("Event listener loop count")
                 if (event.target.textContent === this.questions[count].rightAnswer) {
                     console.log("Correct")
                     count++
@@ -94,13 +95,13 @@ class Quiz {
     };
 
     endPage = () => {
-        // Array.from(goBackButtonArray).forEach((button) => {
-        //     console.log("event listener button back check")
-        //     button.addEventListener('click', (event) => {
-        //         quiz.goBack();
-        //         event.preventDefault();
-        //     })
-        // })
+        Array.from(goBackButtonArray).forEach((button) => {
+            console.log("event listener button back check")
+            button.addEventListener('click', (event) => {
+                quiz.goBack();
+                event.preventDefault();
+            })
+        })
         quizSection.style.display = "none";
         endPageDisplay.style.display = "flex";
         document.getElementById("finalScore").innerHTML = score;
@@ -163,15 +164,14 @@ highScoresButton.addEventListener('click', () => {
     console.log("high scores button event listener check")
     homePageSection.style.display = 'none';
     highScoresPage.style.display = 'flex';
-    console.log("high scores check");
 });
 
-Array.from(goBackButtonArray).forEach((button) => {
-    console.log("event listener button back check")
-    button.addEventListener('click', () => {
-        quiz.goBack();
-    })
-})
+// Array.from(goBackButtonArray).forEach((button) => {
+//     console.log("event listener button back check")
+//     button.addEventListener('click', () => {
+//         quiz.goBack();
+//     })
+// })
 
 // Adding to local storage
 let totalScore = [];
