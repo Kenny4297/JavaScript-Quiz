@@ -95,17 +95,14 @@ class Quiz {
     };
 
     endPage = () => {
-        Array.from(goBackButtonArray).forEach((button) => {
-            console.log("event listener button back check")
-            button.addEventListener('click', (event) => {
-                quiz.goBack();
-                event.preventDefault();
-            })
-        })
         quizSection.style.display = "none";
         endPageDisplay.style.display = "flex";
         document.getElementById("finalScore").innerHTML = score;
         count = 0;
+
+        if (score > Math.min(highScores)) {
+            
+        }
     }
 
     goBack = () => {
@@ -166,15 +163,16 @@ highScoresButton.addEventListener('click', () => {
     highScoresPage.style.display = 'flex';
 });
 
-// Array.from(goBackButtonArray).forEach((button) => {
-//     console.log("event listener button back check")
-//     button.addEventListener('click', () => {
-//         quiz.goBack();
-//     })
-// })
+//WHY IS THIS ACTIVE IF THE BUTTON IS NOT AVAILABLE
+Array.from(goBackButtonArray).forEach((button) => {
+    console.log("event listener button back check")
+    button.addEventListener('click', () => {
+        quiz.goBack();
+    })
+})
 
 // Adding to local storage
-let totalScore = [];
+let highScores = [];
 
 const addScore = (event) => {
     event.preventDefault();
@@ -182,10 +180,10 @@ const addScore = (event) => {
         playerName: document.getElementById("name").value,
         score: document.getElementById("score").value
     }
-    totalScore.push(score);
+    highScores.push(score);
     console.log(score);
 
-    localStorage.setItem("MyScores", JSON.stringify(totalScore));
+    localStorage.setItem("MyScores", JSON.stringify(highScores));
     console.log(`local storage: ${localStorage.getItem("MyScores")}`)
 }
 
