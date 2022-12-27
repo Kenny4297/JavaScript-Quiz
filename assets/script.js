@@ -49,7 +49,7 @@ class Quiz {
     };
 
     nextQuestion = () => {
-        buttonArray.forEach((button) => {
+        Array.from(buttonArray).forEach((button) => {
             button.addEventListener('click', (event) => {
                 if (event.target.textContent === this.questions[count].rightAnswer) {
                     console.log("Correct")
@@ -63,6 +63,11 @@ class Quiz {
                     event.target.style.backgroundColor = "darkgreen";
                     setTimeout(() => {
                         event.target.style.backgroundColor = "purple";
+                        if (count === 5) {
+                            event.stopImmediatePropagation();
+                            event.preventDefault();
+                            return this.endPage();
+                        }
                         this.updateQuestion();
                     }, );
                 } else {
@@ -74,6 +79,11 @@ class Quiz {
                     event.target.style.backgroundColor = "darkred";
                     setTimeout(() => {
                         event.target.style.backgroundColor = "purple";
+                        if (count === 5) {
+                            event.stopImmediatePropagation();
+                            event.preventDefault();
+                            return this.endPage();
+                        }
                         this.updateQuestion();
                     }, );
                 }
@@ -85,11 +95,33 @@ class Quiz {
         quizSection.style.display = "none";
         endPageDisplay.style.display = "flex";
         document.getElementById("finalScore").innerHTML = score;
+
+        highScoreSubmitButton.addEventListener('click', () => {
+            //This displays the value 
+            topScores.innerText = highScoresInput.value;
+        });
+
+        //Checks to see if the current score is greater then the lowest score in the "high Scores Object"
+        if (score > this.LowestHighScore()) {
+            highScoreRecord.style.display = 'flex';
+    // topScores.innerText = highScoresInput.value;
+            highScoreSubmitButton.addEventListener('click', () => {
+                highScoresObject[highScoresInput] = score;
+            })
+            console.log(highScoresObject);
+        }
     }
 
     goBack = () => {
+        console.log("go back button check")
         highScoresPage.style.display = 'none';
         homePageSection.style.display = 'flex';
+    }
+
+    LowestHighScore = () => {
+        let individualHighScores = Object.values(highScoresObject);
+        let minHighScore = Math.min(...individualHighScores)
+        return minHighScore;
     }
 };
 
@@ -107,17 +139,20 @@ const highScoresInput = document.getElementById("high-scores-input");
 const finalScore = document.getElementById("finalScore");
 const topScores = document.getElementById("top-scores");
 const highScoreSubmitButton = document.getElementById("high-score-submit-button");
-const goBackButton = document.getElementById("go-back-button");
+const addHighScorePrompt = document.getElementById("add-high-score-prompt");
+const highScoreRecord = document.getElementById("high-score-record");
+
 
 // document.getElementById('textbox_id').value to get the value of desired box
 
-const buttonArray = document.querySelectorAll("button");
+const buttonArray = document.getElementsByClassName("button");
+const goBackButtonArray = document.querySelectorAll("go-back-button");
 
 //First page 
 
 count = 0;
 score = 0;
-highScoresArray = [];
+highScoresObject = {'ked': 9, 'sarah': 4};
 
 quizSection.style.display = 'none';
 
@@ -138,24 +173,15 @@ highScoresButton.addEventListener('click', () => {
     console.log("high scores check");
 });
 
-highScoreSubmitButton.addEventListener('click', () => {
-    //This displays the value 
-    topScores.innerText = highScoresInput.value;
-    if (highScoresInput.value > Math.min(...highScoresArray)) {
-        highScoresArray.push(highScoresInput.value)
-    }
-});
 
-goBackButton.addEventListener('click', () => {
-    quiz.goBack();
-
+goBackButtonArray.forEach((button) => {
+    console.log("event listener button back check")
+    button.addEventListener('click', () => {
+        quiz.goBack();
+    })
 })
 
 
-
-
-// Game starts
-//StartGameButton starts the game
 
 
 
