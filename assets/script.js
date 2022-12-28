@@ -101,7 +101,11 @@ class Quiz {
         count = 0;
 
         if (score > Math.min(highScores)) {
-            
+            highScoreRecord.style.display = 'flex';
+            submitButton.addEventListener('click', (event) => {
+                endPageDisplay.style.display = "none";
+                highScoresPage.style.display = 'flex';
+            })
         }
     }
 
@@ -134,6 +138,7 @@ const topScores = document.getElementById("top-scores");
 const highScoreSubmitButton = document.getElementById("high-score-submit-button");
 const addHighScorePrompt = document.getElementById("add-high-score-prompt");
 const highScoreRecord = document.getElementById("high-score-record");
+const submitButton = document.getElementById("btn");
 
 const buttonArray = document.getElementsByClassName("button");
 const goBackButtonArray = document.getElementsByClassName("go-back-button");
@@ -142,7 +147,6 @@ const goBackButtonArray = document.getElementsByClassName("go-back-button");
 
 count = 0;
 score = 0;
-highScoresObject = {'ked': 9, 'sarah': 4};
 
 quizSection.style.display = 'none';
 
@@ -158,7 +162,6 @@ startGameButton.addEventListener('click', (event) => {
 })
 
 highScoresButton.addEventListener('click', () => {
-    console.log("high scores button event listener check")
     homePageSection.style.display = 'none';
     highScoresPage.style.display = 'flex';
 });
@@ -172,22 +175,35 @@ Array.from(goBackButtonArray).forEach((button) => {
 })
 
 // Adding to local storage
+
+//This highScores array will reflect what is inside Local Storage
 let highScores = [];
 
 const addScore = (event) => {
     event.preventDefault();
-    let score = {
+    let playerScore = {
         playerName: document.getElementById("name").value,
-        score: document.getElementById("score").value
+        finalScore: score
     }
-    highScores.push(score);
-    console.log(score);
+    highScores.push(playerScore);
+    console.log(playerScore);
 
-    localStorage.setItem("MyScores", JSON.stringify(highScores));
-    console.log(`local storage: ${localStorage.getItem("MyScores")}`)
+    // localStorage.setItem("MyScores", JSON.stringify(highScores));
+    localStorage.setItem(playerScore.playerName, playerScore.finalScore)
+
+    // console.log(`local storage: ${localStorage.getItem("MyScores")}`);
+    
+    // highScores = localStorage.getItem("MyScores");
+
+    homePageSection.style.display = 'none';
+    highScoresPage.style.display = 'flex';
+
+    // topScores.innerText = showScores;
+    // topScores.innerText = localStorage.getItem("MyScores");
+    topScores.innerText = JSON.stringify(localStorage);
 }
 
-document.getElementById("btn").addEventListener('click', addScore);
+submitButton.addEventListener('click', addScore);
 
 
 
