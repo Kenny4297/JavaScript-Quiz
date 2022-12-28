@@ -120,7 +120,7 @@ class Quiz {
     }
 
     goBack = () => {
-        clearInterval(tickingTimer);
+        // clearInterval(tickingTimer);
         this.stopTimer();
         highScoresPage.style.display = 'none';
         endPageDisplay.style.display = "none";
@@ -136,9 +136,15 @@ class Quiz {
     stopTimer = () => {
         clearInterval(quizTimer);
     }
+
+    startTimer = () => {
+        quizTimer;
+    }
 };
 
 const quiz = new Quiz();
+
+let gameTime = 30;
 
 const quizSection = document.getElementById("section");
 const startGameButton = document.querySelector("#start-game-button");
@@ -173,12 +179,13 @@ quizSection.style.display = 'none';
 
 startGameButton.addEventListener('click', (event) => {
     count = 0;
-    gameTime = 3;
+    score = 0;
     homePageSection.style.display = "none"
     quizSection.style.display = 'flex';
-    quizTimer;
+    quiz.startTimer();
     quiz.updateQuestion();
     quiz.nextQuestion();
+    console.log(`${gameTime}`)
 })
 
 highScoresButton.addEventListener('click', () => {
@@ -226,7 +233,6 @@ const addScore = (event) => {
 
 submitButton.addEventListener('click', addScore);
 
-let gameTime = 3;
 
 const tickingTimer = () => {
     if (gameTime >= 0) {
