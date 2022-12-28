@@ -80,6 +80,7 @@ class Quiz {
                     rightOrWrong.style.color = "darkred"
                     rightOrWrong.innerText = "Wrong!";
                     event.target.style.backgroundColor = "darkred";
+                    gameTime -= 10;
                     setTimeout(() => {
                         event.target.style.backgroundColor = "purple";
                         if (count === 5) {
@@ -95,8 +96,15 @@ class Quiz {
     };
 
     endPage = () => {
+        this.stopTimer();
         quizSection.style.display = "none";
         endPageDisplay.style.display = "flex";
+        // if (gameTime <= 0) {
+        //     document.getElementById("you-lose").innerText = "You lose!"
+        //     document.getElementById("finalScore").innerHTML = score;
+        // }
+        // document.getElementById("you-lose").innerText = "You Win!"
+
         document.getElementById("finalScore").innerHTML = score;
         count = 0;
 
@@ -107,9 +115,13 @@ class Quiz {
                 highScoresPage.style.display = 'flex';
             })
         }
+
+
     }
 
     goBack = () => {
+        clearInterval(tickingTimer);
+        this.stopTimer();
         highScoresPage.style.display = 'none';
         endPageDisplay.style.display = "none";
         homePageSection.style.display = 'flex';
@@ -119,6 +131,10 @@ class Quiz {
         let individualHighScores = Object.values(highScoresObject);
         let minHighScore = Math.min(...individualHighScores);
         return minHighScore;
+    }
+
+    stopTimer = () => {
+        clearInterval(quizTimer);
     }
 };
 
@@ -157,12 +173,12 @@ quizSection.style.display = 'none';
 
 startGameButton.addEventListener('click', (event) => {
     count = 0;
+    gameTime = 3;
     homePageSection.style.display = "none"
     quizSection.style.display = 'flex';
-    setInterval(tickingTimer, 1000);
+    quizTimer;
     quiz.updateQuestion();
     quiz.nextQuestion();
-
 })
 
 highScoresButton.addEventListener('click', () => {
@@ -174,6 +190,7 @@ highScoresButton.addEventListener('click', () => {
 Array.from(goBackButtonArray).forEach((button) => {
     console.log("event listener button back check")
     button.addEventListener('click', () => {
+        // endPageDisplay.style.display = 'none';
         quiz.goBack();
     })
 })
@@ -209,13 +226,20 @@ const addScore = (event) => {
 
 submitButton.addEventListener('click', addScore);
 
-let gameTime = 59;
+let gameTime = 3;
 
 const tickingTimer = () => {
-
-    timer.innerHTML = `:${gameTime}`;
-    gameTime--;
+    if (gameTime >= 0) {
+        timer.innerHTML = `:${gameTime}`;
+        gameTime--;
+    } else {
+        clearInterval(tickingTimer);
+        quiz.endPage();
+    }
 }
+
+const quizTimer = setInterval(tickingTimer, 1000);
+
 
 
 
