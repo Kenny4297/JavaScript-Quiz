@@ -143,6 +143,8 @@ const submitButton = document.getElementById("btn");
 const buttonArray = document.getElementsByClassName("button");
 const goBackButtonArray = document.getElementsByClassName("go-back-button");
 
+const timer = document.getElementById("timer");
+
 //First page 
 
 count = 0;
@@ -157,8 +159,10 @@ startGameButton.addEventListener('click', (event) => {
     count = 0;
     homePageSection.style.display = "none"
     quizSection.style.display = 'flex';
+    setInterval(tickingTimer, 1000);
     quiz.updateQuestion();
     quiz.nextQuestion();
+
 })
 
 highScoresButton.addEventListener('click', () => {
@@ -204,6 +208,14 @@ const addScore = (event) => {
 }
 
 submitButton.addEventListener('click', addScore);
+
+let gameTime = 59;
+
+const tickingTimer = () => {
+
+    timer.innerHTML = `:${gameTime}`;
+    gameTime--;
+}
 
 
 

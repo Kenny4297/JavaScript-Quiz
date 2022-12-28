@@ -18,6 +18,7 @@ body {
 #title {
     border-bottom: 2px solid grey;
     text-align: center;
+    display: inline-block;
 }
 
 #section button {
@@ -48,6 +49,14 @@ button p {
     color: blue;
     display: none;
     font-weight: bold;
+}
+
+
+#timer {
+    display: inline-block;
+    outline: 2px solid red;
+    margin-top: -20px;
+    margin-bottom: -5px;
 }
 
 /* Home Page section */
