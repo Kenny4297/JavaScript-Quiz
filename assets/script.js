@@ -143,8 +143,28 @@ class Quiz {
     startTimer = () => {
         quizTimer;
     }
-};
 
+    clearHighScores = () => {
+        console.log("clear high scores function check")
+        localStorageHighScores = [];
+        localStorage.clear();
+
+        let dummyScore = {
+            playerName: "loser",
+            finalScore: 0
+        }
+        
+        localStorageHighScores.push(dummyScore);
+        localStorageHighScores.push(dummyScore);
+        localStorageHighScores.push(dummyScore);
+
+        document.getElementById("high-scores-list1").innerText = `${localStorageHighScores[0].playerName} : ${localStorageHighScores[0].finalScore}`
+
+        document.getElementById("high-scores-list2").innerText = `${localStorageHighScores[1].playerName} : ${localStorageHighScores[1].finalScore}`
+
+        document.getElementById("high-scores-list3").innerText = `${localStorageHighScores[2].playerName} : ${localStorageHighScores[2].finalScore}`
+    }
+};
 
 const tickingTimer = () => {
     if (gameTime >= 0) {
@@ -221,6 +241,12 @@ localStorageHighScores.push(dummyScore)
 localStorageHighScores.push(dummyScore)
 localStorageHighScores.push(dummyScore)
 
+document.getElementById("high-scores-list1").innerText = `${localStorageHighScores[0].playerName} : ${localStorageHighScores[0].finalScore}`
+
+document.getElementById("high-scores-list2").innerText = `${localStorageHighScores[1].playerName} : ${localStorageHighScores[1].finalScore}`
+
+document.getElementById("high-scores-list3").innerText = `${localStorageHighScores[2].playerName} : ${localStorageHighScores[2].finalScore}`
+
 const highScoresLimit = 3;
 
 const addScore = (event) => {
@@ -256,9 +282,9 @@ const addScore = (event) => {
 //Adding the score to the High Scores Page
 const highScoresList = document.getElementById("high-scores-list");
 
-
-
 submitButton.addEventListener('click', addScore);
+
+document.getElementById("clear-high-scores").addEventListener('click', quiz.clearHighScores);
 
 
 
