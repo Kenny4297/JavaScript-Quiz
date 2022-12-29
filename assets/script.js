@@ -43,22 +43,18 @@ class Quiz {
 
         title.innerText = this.questions[count].question;
     
-        q1.innerHTML = this.questions[count].answers[0]
-        q2.innerHTML = this.questions[count].answers[1]
-        q3.innerHTML = this.questions[count].answers[2]
-        q4.innerHTML = this.questions[count].answers[3]
+        q1.innerText = this.questions[count].answers[0]
+        q2.innerText = this.questions[count].answers[1]
+        q3.innerText = this.questions[count].answers[2]
+        q4.innerText = this.questions[count].answers[3]
     };
 
     nextQuestion = () => {
-        console.log(`Count count from "nextQuestion": ${count}`)
-        //Array.from(buttonArray).forEach((button) => {
-            for(var i = 0; i <4; i++){
-            console.log("entering the for each")
-            buttonArray[i].addEventListener('click', (event) => {
+        // console.log(`Count count from "nextQuestion": ${count}`)
+        Array.from(buttonArray).forEach((button) => {
+            button.addEventListener('click', (event) => {
                 // console.log("Event listener loop count")
-                console.log(event.target.textContent)
-                console.log(event.target.innerHTML)
-                if (event.target.innerHTML === this.questions[count].rightAnswer) {
+                if (event.target.textContent === this.questions[count].rightAnswer) {
                     // console.log("Correct")
                     count++
                     console.log(`count: ${count}`)
@@ -81,7 +77,7 @@ class Quiz {
                 } else {
                     // console.log("wrong answer")
                     count++
-                    console.log(`the count for an error:${count}`)
+                    console.log(`the count:${count}`)
                     rightOrWrong.style.display = 'block';
                     rightOrWrong.style.color = "darkred"
                     rightOrWrong.innerText = "Wrong!";
@@ -97,12 +93,8 @@ class Quiz {
                         this.updateQuestion();
                     }, );
                 }
-               // if(count=== 5){
-                //    buttonArray[i].removeEventListener("click", btn)
-                //}
             })
-       // })
-        }
+        })
     };
 
     endPage = () => {
@@ -112,7 +104,7 @@ class Quiz {
 
 
         document.getElementById("finalScore").innerHTML = score;
-        // count = 0;
+        count = 0;
 
         if (score > Math.min(highScores)) {
             highScoreRecord.style.display = 'flex';
@@ -146,62 +138,6 @@ class Quiz {
     }
 };
 
-const nextQuestion = () => {
-    console.log(`Count count from "nextQuestion": ${count}`)
-    //Array.from(buttonArray).forEach((button) => {
-        for(var i = 0; i <4; i++){
-        console.log("entering the for each")
-        buttonArray[i].addEventListener('click', (event) => {
-            // console.log("Event listener loop count")
-            console.log(event.target.textContent)
-            console.log(event.target.innerHTML)
-            if (event.target.innerHTML === this.questions[count].rightAnswer) {
-                // console.log("Correct")
-                count++
-                console.log(`count: ${count}`)
-                score += 10
-                // scoreDisplay.innerText = `Current score: ${score}`;
-                // console.log(`This is the current score: ${score}`);
-                rightOrWrong.style.display = 'block';
-                rightOrWrong.style.color = "darkgreen";
-                rightOrWrong.innerText = "Correct!"
-                event.target.style.backgroundColor = "darkgreen";
-                setTimeout(() => {
-                    event.target.style.backgroundColor = "purple";
-                    if (count === 5) {
-                        // event.stopImmediatePropagation();
-                        // event.preventDefault();
-                        return this.endPage();
-                    }
-                    this.updateQuestion();
-                }, );
-            } else {
-                // console.log("wrong answer")
-                count++
-                console.log(`the count for an error:${count}`)
-                rightOrWrong.style.display = 'block';
-                rightOrWrong.style.color = "darkred"
-                rightOrWrong.innerText = "Wrong!";
-                event.target.style.backgroundColor = "darkred";
-                gameTime -= 10;
-                setTimeout(() => {
-                    event.target.style.backgroundColor = "purple";
-                    if (count === 5) {
-                        event.stopImmediatePropagation();
-                        event.preventDefault();
-                        return this.endPage();
-                    }
-                    this.updateQuestion();
-                }, );
-            }
-           // if(count=== 5){
-            //    buttonArray[i].removeEventListener("click", btn)
-            //}
-        })
-   // })
-    }
-};
-
 const quiz = new Quiz();
 
 let gameTime = 300;
@@ -222,30 +158,26 @@ const addHighScorePrompt = document.getElementById("add-high-score-prompt");
 const highScoreRecord = document.getElementById("high-score-record");
 const submitButton = document.getElementById("btn");
 
-const buttonArray = document.querySelectorAll("buttons");
+const buttonArray = document.getElementsByClassName("button");
 const goBackButtonArray = document.getElementsByClassName("go-back-button");
-console.log(buttonArray[0])
+
 const timer = document.getElementById("timer");
 
-let count = 0;
-let score = 0;
+count = 0;
+score = 0;
 
 quizSection.style.display = 'none';
-// test test 
+
 startGameButton.addEventListener('click', (event) => {
     count = 0;
     score = 0;
-    console.log(`Count: ${count}`);
     homePageSection.style.display = "none"
     quizSection.style.display = 'flex';
     quizTimer = setInterval(tickingTimer, 1000);
     quiz.updateQuestion();
-    nextQuestion();
-    console.log(`Count: ${count}`);
+    quiz.nextQuestion();
     console.log(`${gameTime}`)
-});
-
-
+})
 
 highScoresButton.addEventListener('click', () => {
     homePageSection.style.display = 'none';
