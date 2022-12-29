@@ -145,6 +145,7 @@ class Quiz {
     }
 };
 
+
 const tickingTimer = () => {
     if (gameTime >= 0) {
         timer.innerHTML = `:${gameTime}`;
@@ -201,16 +202,24 @@ highScoresButton.addEventListener('click', () => {
     quiz.goBackButton();
 })
 
-
-
 // Adding to local storage
 //This highScores array will reflect what is inside Local Storage
 let highScoresArray = [];
+
 let localStorageHighScores = JSON.parse(localStorage.getItem("MyScores"));
 
 if (!localStorageHighScores) {
     localStorageHighScores = [];
 }
+
+let dummyScore = {
+    playerName: "loser",
+    finalScore: 0
+}
+
+localStorageHighScores.push(dummyScore)
+localStorageHighScores.push(dummyScore)
+localStorageHighScores.push(dummyScore)
 
 const highScoresLimit = 3;
 
@@ -227,7 +236,7 @@ const addScore = (event) => {
 
     //Making sure the array is sorted
     localStorageHighScores.sort( (a, b) => {
-        return b.score - a.score
+        return b.finalScore - a.finalScore
     })
 
     //Making sure that there are not more than the top three entries
@@ -237,11 +246,11 @@ const addScore = (event) => {
     localStorage.setItem('MyScores', JSON.stringify(localStorageHighScores))
 
     //Here we get the first items in our local storage and set them to out high scores
-    document.getElementById("high-scores-list1").innerText = `${localStorageHighScores[0].playerName} : ${localStorageHighScores[0].score}`
+    document.getElementById("high-scores-list1").innerText = `${localStorageHighScores[0].playerName} : ${localStorageHighScores[0].finalScore}`
 
-    document.getElementById("high-scores-list2").innerText = `${localStorageHighScores[1].playerName} : ${localStorageHighScores[1].score}`
+    document.getElementById("high-scores-list2").innerText = `${localStorageHighScores[1].playerName} : ${localStorageHighScores[1].finalScore}`
 
-    document.getElementById("high-scores-list3").innerText = `${localStorageHighScores[2].playerName} : ${localStorageHighScores[2].score}`
+    document.getElementById("high-scores-list3").innerText = `${localStorageHighScores[2].playerName} : ${localStorageHighScores[2].finalScore}`
 }
 
 //Adding the score to the High Scores Page
@@ -251,11 +260,7 @@ const highScoresList = document.getElementById("high-scores-list");
 
 submitButton.addEventListener('click', addScore);
 
-//Timer section
 
-
-// const quizTimer = setInterval(tickingTimer, 1000);
-//This has to run to assign it to the variable
 
 
 
