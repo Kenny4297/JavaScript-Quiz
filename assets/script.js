@@ -30,12 +30,39 @@ questions = [
     },
 ]
 
+//The parameters for the quiz time
+let gameTime = 59;
+let quizTimer;
+
+//DOM elements being used
+const quizSection = document.getElementById("section");
+const startGameButton = document.getElementById("start-game-button");
+const homePageSection = document.getElementById("home-page");
+const highScoresPage = document.getElementById("high-scores");
+const highScoresButton = document.getElementById("high-scores-button");
+const scoreDisplay = document.getElementById("score");
+const endPageDisplay = document.getElementById("end-page");
+const rightOrWrong = document.getElementById("right-or-wrong");
+const finalScore = document.getElementById("finalScore");
+const highScoreSubmitButton = document.getElementById("high-score-submit-button");
+const highScoreRecord = document.getElementById("high-score-record");
+const submitButton = document.getElementById("btn");
+const buttonArray = document.getElementsByClassName("button");
+const goBackButtonArray = Array.from(document.getElementsByClassName("go-back-button"));
+
+//Setting the count and score for the game
+count = 0;
+score = 0;
+
+quizSection.style.display = 'none';
+
+//Updates the next question from the above array
 const updateQuestion = () => {
-    // console.log(count);
     if (count === 5 ) {
         return endPage();
     }
     rightOrWrong.style.display = 'none';
+    scoreDisplay.style.color = "purple";
     scoreDisplay.innerText = `Current score: ${score}`;
 
     title.innerText = questions[count].question;
@@ -46,42 +73,39 @@ const updateQuestion = () => {
     q4.innerText = questions[count].answers[3]
 };
 
+//Displays the next question in the array
+const listenForUserSelection = () => {
+    Array.from(buttonArray).forEach((button) => {
+        button.addEventListener('click', (checkForCorrectAnswer))
+    })
+};
+
+//Checks to see if the user selected the correct answer
 const checkForCorrectAnswer = (event) => {
     console.log("'Check for correct answer' function check")
     if (event.target.textContent === questions[count].rightAnswer) {
-        console.log("Correct")
         count++
-        console.log(`The count for a correct selection: ${count}`)
         score += 10
-        // scoreDisplay.innerText = `Current score: ${score}`;
-        // console.log(`This is the current score: ${score}`);
         rightOrWrong.style.display = 'block';
-        rightOrWrong.style.color = "darkgreen";
+        rightOrWrong.style.color = "green";
         rightOrWrong.innerText = "Correct!"
-        event.target.style.backgroundColor = "darkgreen";
         setTimeout(() => {
-            event.target.style.backgroundColor = "purple";
             if (count === 5) {
-                // event.stopImmediatePropagation();
-                // event.preventDefault();
                 return endPage();
             }
             updateQuestion();
         }, 1000);
+
     } else {
-        // console.log("wrong answer")
         count++
-        console.log(`the count after an incorrect selection:${count}`)
         rightOrWrong.style.display = 'block';
-        rightOrWrong.style.color = "darkred"
+        rightOrWrong.style.color = "red"
         rightOrWrong.innerText = "Wrong! -10 seconds!";
-        event.target.style.backgroundColor = "darkred";
+        // event.target.style.backgroundColor = "darkred";
         gameTime -= 10;
         setTimeout(() => {
-            event.target.style.backgroundColor = "purple";
+            // event.target.style.backgroundColor = "purple";
             if (count === 5) {
-                // event.stopImmediatePropagation();
-                // event.preventDefault();
                 return endPage();
             }
             updateQuestion();
@@ -89,42 +113,37 @@ const checkForCorrectAnswer = (event) => {
     }
 }
 
-const nextQuestion = () => {
-    console.log("'nextQuestion()' function check")
-    Array.from(buttonArray).forEach((button) => {
-        button.addEventListener('click', (checkForCorrectAnswer))
-    })
-};
-
+//Brings the user to the ending page
 const endPage = () => {
     stopTimer();
-    gameTime = 30;
-    // removeEventListener(this.checkForCorrectAnswer);
+    gameTime = 59;
     quizSection.style.display = "none";
     endPageDisplay.style.display = "flex";
 
     document.getElementById("finalScore").innerHTML = score;
     count = 0;
 
-    goBackButton();
-
-    if (score > localStorageHighScores[0].finalScore) {
+    //Prompts the user to enter their name if their score beat the third highest high score
+    if (score > localStorageHighScores[2].finalScore) {
         highScoreRecord.style.display = 'flex';
-        submitButton.addEventListener('click', (event) => {
+        submitButton.addEventListener('click', () => {
             endPageDisplay.style.display = "none";
             highScoresPage.style.display = 'flex';
-        })
+        });
     }
+
+    goBackButton();
 };
 
+//Returns the user to the home page
 const goBackPage = () => {
-    // clearInterval(tickingTimer);
     stopTimer();
     highScoresPage.style.display = 'none';
     endPageDisplay.style.display = "none";
     homePageSection.style.display = 'flex';
 }
 
+//Event listener for the "go back button"
 const goBackButton = () => {
     goBackButtonArray.forEach((button) => {
         button.addEventListener('click', () => {
@@ -133,118 +152,61 @@ const goBackButton = () => {
     })
 }
 
-const stopTimer = () => {
-    clearInterval(quizTimer);
-}
-
+//Starts the timer
 const startTimer = () => {
     quizTimer;
 }
 
-const clearHighScores = () => {
-    console.log("clear high scores function check")
-    localStorageHighScores = [];
-    localStorage.clear();
+//stops the timer
+const stopTimer = () => {
+    clearInterval(quizTimer);
+}
 
+//Writes to the high scores 
+const setUpHighScores = () => {
+    document.getElementById("high-scores-list1").innerText = `1) ${localStorageHighScores[0].playerName} : ${localStorageHighScores[0].finalScore}`
+    
+    document.getElementById("high-scores-list2").innerText = `2) ${localStorageHighScores[1].playerName} : ${localStorageHighScores[1].finalScore}`
+    
+    document.getElementById("high-scores-list3").innerText = `3) ${localStorageHighScores[2].playerName} : ${localStorageHighScores[2].finalScore}`
+}
+
+//Sets the dummy scores
+const setDummyScore = () => {
     let dummyScore = {
         playerName: "loser",
         finalScore: 0
     }
     
-    localStorageHighScores.push(dummyScore);
-    localStorageHighScores.push(dummyScore);
-    localStorageHighScores.push(dummyScore);
-
-    document.getElementById("high-scores-list1").innerText = `${localStorageHighScores[0].playerName} : ${localStorageHighScores[0].finalScore}`
-
-    document.getElementById("high-scores-list2").innerText = `${localStorageHighScores[1].playerName} : ${localStorageHighScores[1].finalScore}`
-
-    document.getElementById("high-scores-list3").innerText = `${localStorageHighScores[2].playerName} : ${localStorageHighScores[2].finalScore}`
+    localStorageHighScores.push(dummyScore)
+    localStorageHighScores.push(dummyScore)
+    localStorageHighScores.push(dummyScore)
+    
+    setUpHighScores();
 }
 
+//Resets the high scores to their dummy scores (Loser: 10)
+const resetHighScores = () => {
+    localStorageHighScores = [];
+    localStorage.clear();
 
+    setDummyScore();
+
+    setUpHighScores();
+}
+
+//The timer for the quiz
 const tickingTimer = () => {
     if (gameTime >= 0) {
         timer.innerHTML = `:${gameTime}`;
         gameTime--;
     } else {
         clearInterval(tickingTimer);
-        quiz.endPage();
+        endPage();
     }
 }
 
-
-let gameTime = 60;
-let quizTimer;
-const quizSection = document.getElementById("section");
-const startGameButton = document.querySelector("#start-game-button");
-const homePageSection = document.querySelector("#home-page");
-const highScoresPage = document.querySelector("#high-scores");
-const highScoresButton = document.getElementById("high-scores-button");
-const scoreDisplay = document.getElementById("score");
-const endPageDisplay = document.getElementById("end-page");
-const rightOrWrong = document.getElementById("right-or-wrong");
-const highScoresInput = document.getElementById("high-scores-input");
-const finalScore = document.getElementById("finalScore");
-const topScores = document.getElementById("top-scores");
-const highScoreSubmitButton = document.getElementById("high-score-submit-button");
-const addHighScorePrompt = document.getElementById("add-high-score-prompt");
-const highScoreRecord = document.getElementById("high-score-record");
-const submitButton = document.getElementById("btn");
-
-const buttonArray = document.getElementsByClassName("button");
-const goBackButtonArray = Array.from(document.getElementsByClassName("go-back-button"));
-
-const timer = document.getElementById("timer");
-
-count = 0;
-score = 0;
-
-quizSection.style.display = 'none';
-
-startGameButton.addEventListener('click', (event) => {
-    count = 0;
-    score = 0;
-    homePageSection.style.display = "none"
-    quizSection.style.display = 'flex';
-    quizTimer = setInterval(tickingTimer, 1000);
-    updateQuestion();
-    nextQuestion();
-})
-
-highScoresButton.addEventListener('click', () => {
-    homePageSection.style.display = 'none';
-    highScoresPage.style.display = 'flex';
-    goBackButton();
-})
-
-// Adding to local storage
-//This highScores array will reflect what is inside Local Storage
-let highScoresArray = [];
-
-let localStorageHighScores = JSON.parse(localStorage.getItem("MyScores"));
-
-if (!localStorageHighScores) {
-    localStorageHighScores = [];
-}
-
-let dummyScore = {
-    playerName: "loser",
-    finalScore: 0
-}
-
-localStorageHighScores.push(dummyScore)
-localStorageHighScores.push(dummyScore)
-localStorageHighScores.push(dummyScore)
-
-document.getElementById("high-scores-list1").innerText = `${localStorageHighScores[0].playerName} : ${localStorageHighScores[0].finalScore}`
-
-document.getElementById("high-scores-list2").innerText = `${localStorageHighScores[1].playerName} : ${localStorageHighScores[1].finalScore}`
-
-document.getElementById("high-scores-list3").innerText = `${localStorageHighScores[2].playerName} : ${localStorageHighScores[2].finalScore}`
-
-const highScoresLimit = 3;
-
+//Adds the score to local storage
 const addScore = (event) => {
     event.preventDefault();
 
@@ -252,6 +214,7 @@ const addScore = (event) => {
         playerName: document.getElementById("name").value,
         finalScore: score
     }
+
     localStorageHighScores.push(playerScore);
     // highScores.push(playerScore);
     console.log(localStorageHighScores);
@@ -267,20 +230,51 @@ const addScore = (event) => {
     //Permanently Updates our local storage high scores
     localStorage.setItem('MyScores', JSON.stringify(localStorageHighScores))
 
-    //Here we get the first items in our local storage and set them to out high scores
-    document.getElementById("high-scores-list1").innerText = `${localStorageHighScores[0].playerName} : ${localStorageHighScores[0].finalScore}`
-
-    document.getElementById("high-scores-list2").innerText = `${localStorageHighScores[1].playerName} : ${localStorageHighScores[1].finalScore}`
-
-    document.getElementById("high-scores-list3").innerText = `${localStorageHighScores[2].playerName} : ${localStorageHighScores[2].finalScore}`
+    setUpHighScores();
 }
+
+
+
+startGameButton.addEventListener('click', (event) => {
+    count = 0;
+    score = 0;
+    homePageSection.style.display = "none"
+    quizSection.style.display = 'flex';
+    quizTimer = setInterval(tickingTimer, 1000);
+    updateQuestion();
+    listenForUserSelection();
+})
+
+highScoresButton.addEventListener('click', () => {
+    homePageSection.style.display = 'none';
+    highScoresPage.style.display = 'flex';
+    goBackButton();
+})
+
+// Adding to local storage
+//This highScoresArray will reflect what is inside Local Storage
+let highScoresArray = [];
+
+let localStorageHighScores = JSON.parse(localStorage.getItem("MyScores"));
+
+if (!localStorageHighScores) {
+    localStorageHighScores = [];
+}
+
+//Set dummy high scores
+setDummyScore();
+
+//Limits the high Scores
+const highScoresLimit = 3;
 
 //Adding the score to the High Scores Page
 const highScoresList = document.getElementById("high-scores-list");
 
+//Submits the high scores
 submitButton.addEventListener('click', addScore);
 
-document.getElementById("clear-high-scores").addEventListener('click', clearHighScores);
+//resets the high scores
+document.getElementById("clear-high-scores").addEventListener('click', resetHighScores);
 
 
 

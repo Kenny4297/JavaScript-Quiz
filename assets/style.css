@@ -1,62 +1,24 @@
+/* The background for the entire project */
+
 body {
-    background-color: black;
+    background-color: lightblue;
     color: white;
 }
 
-/* Quiz Section */
-#section {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    margin: 0 auto;
-    width: 700px;
-    height: 400px;
-    justify-content: space-around;
-    outline: 4px dotted yellow;
+section {
+    background-color: lightgrey;
+    color: black;
 }
 
-#title {
-    border-bottom: 2px solid grey;
-    text-align: center;
-    display: inline-block;
-}
-
-#section button {
-    justify-content: center;
-    row-gap: 10px;
-    width: 40%;
-    height: 10%;
-    margin: 0 auto;
-    color: white;
-    background-color: purple;
-    border-radius: 5px;
-}
-
+/* Button styling */
 button:hover {
     cursor: pointer;
     background: lightblue;
     color: black;
 }
+
 button p {
     margin: 0 auto;
-}
-
-#right-or-wrong {
-    position: absolute;
-    top: 400px;
-    font-style: italic;
-    font-size: 20px;
-    color: blue;
-    display: none;
-    font-weight: bold;
-}
-
-
-#timer {
-    display: inline-block;
-    outline: 2px solid red;
-    margin-top: -20px;
-    margin-bottom: -5px;
 }
 
 /* Home Page section */
@@ -65,21 +27,26 @@ button p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    outline: 6px solid yellow;
+    box-shadow: -5px -5px 5px 5px green;
     padding-left: 20px;
     padding-right: 20px;
     padding-bottom: 100px;
     margin: 0 auto;
+    margin-top: 30px;
     width: 60%;
     height: 400px;
+    background-color: white;
 }
 
 #home-page h1 {
     font-size: 30px;
+    text-align: center;
+    width: 25%;
+    border-bottom: solid 2px green;
 }
 
 #home-page p {
-    color: white;
+    color: black;
     font-size: 20px;;
 }
 
@@ -95,30 +62,150 @@ button p {
     border-radius: 5px;
 }
 
+#start-game-button:hover, #high-scores-button:hover {
+    background-color: white;
+    color: darkblue;
+}
+
+/* Quiz Section */
+#section {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 30px;
+    padding-bottom: 40px;
+    width: 700px;
+    height: 400px;
+    justify-content: space-around;
+    box-shadow: -5px -5px 5px 5px turquoise;
+
+}
+
+#title {
+    border-bottom: 2px solid grey;
+    text-align: center;
+    display: inline-block;
+}
+
+#section button {
+    justify-content: center;
+    row-gap: 10px;
+    width: 40%;
+    height: 10%;
+    margin: 0 auto;
+    color: black;
+    background-color: white;
+    border-radius: 5px;
+}
+
+#section button:hover {
+    cursor: pointer;
+    background: lightblue;
+    color: black;
+}
+
+button:hover {
+    cursor: pointer;
+    background: lightblue;
+    color: black;
+}
+
+button p {
+    margin: 0 auto;
+}
+
+#right-or-wrong {
+    position: absolute;
+    top: 400px;
+    font-style: italic;
+    font-size: 20px;
+    color: blue;
+    display: none;
+    font-weight: bold;
+}
+
+#timer {
+    display: inline-block;
+    margin-top: -20px;
+    margin-bottom: -5px;
+    color: white;
+}
+
 /* High Scores section */
 #high-scores {
     display: none;
     flex-direction: column;
     text-align: center;
+    box-shadow: -5px -5px 5px 5px blue;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 100px;
+    margin: 0 auto;
+    margin-top: 30px;
+    width: 60%;
+    height: 400px;
+    background-color: white;
 }
 
-#go-back-button {
+#high-scores h1 {
+    color: blue;
+    margin: 0 auto;
+    margin-top: 20px;
+    font-size: 40px;
+    width: 30%;
+    border-bottom: 2px solid blue;
+}
+
+#high-scores p {
+    font-size: 22px;
+}
+
+.go-back-button, #clear-high-scores {
     border: 3px solid white;
+    height: 60px;
+    width: 40%;
+    font-size: 25px;
+    margin: 0 auto;
+    color: white;
+    background-color: purple;
+    border-radius: 5px;
+    position: relative;
+    top: 40px;
+}
+
+.go-back-button:hover, #clear-high-scores:hover {
+    cursor: pointer;
+    background: lightblue;
+    color: black;
 }
 
 #end-page {
     display: none;
     flex-direction: column;
     text-align: center;
-    color: white;
+    /* color: white; */
+}
+
+#end-page h1 {
+    font-size: 40px;
+    color: black;
+}
+
+#end-page p {
+    font-size: 25px;
 }
 
 #score {
     color: white;
-    border: 2px solid red;
-    font-size: 20px;;
+    font-size: 20px;
+}
+
+#finalScore {
+    color: darkgreen;
 }
 
 #high-score-record {
-    display: none;
+    display: flex;
+    flex-direction: column;
 }
