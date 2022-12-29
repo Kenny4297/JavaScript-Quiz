@@ -95,7 +95,6 @@ class Quiz {
     nextQuestion = () => {
         console.log("'nextQuestion()' function check")
         Array.from(buttonArray).forEach((button) => {
-            // console.log(buttonArray);
             button.addEventListener('click', (this.checkForCorrectAnswer))
         })
     };
@@ -110,7 +109,9 @@ class Quiz {
         document.getElementById("finalScore").innerHTML = score;
         count = 0;
 
-        if (score > Math.min(highScores)) {
+        this.goBackButton();
+
+        if (score > localStorageHighScores[0].finalScore) {
             highScoreRecord.style.display = 'flex';
             submitButton.addEventListener('click', (event) => {
                 endPageDisplay.style.display = "none";
@@ -119,7 +120,7 @@ class Quiz {
         }
     };
 
-    goBack = () => {
+    goBackPage = () => {
         // clearInterval(tickingTimer);
         this.stopTimer();
         highScoresPage.style.display = 'none';
@@ -127,10 +128,12 @@ class Quiz {
         homePageSection.style.display = 'flex';
     }
 
-    LowestHighScore = () => {
-        let individualHighScores = Object.values(highScoresObject);
-        let minHighScore = Math.min(...individualHighScores);
-        return minHighScore;
+    goBackButton = () => {
+        goBackButtonArray.forEach((button) => {
+            button.addEventListener('click', () => {
+                quiz.goBackPage();
+            })
+        })
     }
 
     stopTimer = () => {
@@ -140,8 +143,17 @@ class Quiz {
     startTimer = () => {
         quizTimer;
     }
-}
+};
 
+const tickingTimer = () => {
+    if (gameTime >= 0) {
+        timer.innerHTML = `:${gameTime}`;
+        gameTime--;
+    } else {
+        clearInterval(tickingTimer);
+        quiz.endPage();
+    }
+}
 
 const quiz = new Quiz();
 
@@ -164,7 +176,7 @@ const highScoreRecord = document.getElementById("high-score-record");
 const submitButton = document.getElementById("btn");
 
 const buttonArray = document.getElementsByClassName("button");
-const goBackButtonArray = document.getElementsByClassName("go-back-button");
+const goBackButtonArray = Array.from(document.getElementsByClassName("go-back-button"));
 
 const timer = document.getElementById("timer");
 
@@ -186,21 +198,21 @@ startGameButton.addEventListener('click', (event) => {
 highScoresButton.addEventListener('click', () => {
     homePageSection.style.display = 'none';
     highScoresPage.style.display = 'flex';
-});
-
-//WHY IS THIS ACTIVE IF THE BUTTON IS NOT AVAILABLE
-//If I click anywhere on any page, this will initiate...
-Array.from(goBackButtonArray).forEach((button) => {
-    console.log("event listener button back check")
-    button.addEventListener('click', () => {
-        quiz.goBack();
-    })
+    quiz.goBackButton();
 })
+
+
 
 // Adding to local storage
 //This highScores array will reflect what is inside Local Storage
-// let highScores = [];
-let highScores = JSON.parse(localStorage.getItem("highScores"));
+let highScoresArray = [];
+let localStorageHighScores = JSON.parse(localStorage.getItem("MyScores"));
+
+if (!localStorageHighScores) {
+    localStorageHighScores = [];
+}
+
+const highScoresLimit = 3;
 
 const addScore = (event) => {
     event.preventDefault();
@@ -209,29 +221,38 @@ const addScore = (event) => {
         playerName: document.getElementById("name").value,
         finalScore: score
     }
-    highScores.push(playerScore);
-    console.log(playerScore);
+    localStorageHighScores.push(playerScore);
+    // highScores.push(playerScore);
+    console.log(localStorageHighScores);
 
-    localStorage.setItem(playerScore.playerName, playerScore.finalScore)
+    //Making sure the array is sorted
+    localStorageHighScores.sort( (a, b) => {
+        return b.score - a.score
+    })
 
-    homePageSection.style.display = 'none';
-    highScoresPage.style.display = 'flex';
+    //Making sure that there are not more than the top three entries
+    localStorageHighScores.splice(3);
 
-    topScores.innerText = JSON.stringify(localStorage);
+    //Permanently Updates our local storage high scores
+    localStorage.setItem('MyScores', JSON.stringify(localStorageHighScores))
+
+    //Here we get the first items in our local storage and set them to out high scores
+    document.getElementById("high-scores-list1").innerText = `${localStorageHighScores[0].playerName} : ${localStorageHighScores[0].score}`
+
+    document.getElementById("high-scores-list2").innerText = `${localStorageHighScores[1].playerName} : ${localStorageHighScores[1].score}`
+
+    document.getElementById("high-scores-list3").innerText = `${localStorageHighScores[2].playerName} : ${localStorageHighScores[2].score}`
 }
+
+//Adding the score to the High Scores Page
+const highScoresList = document.getElementById("high-scores-list");
+
+
 
 submitButton.addEventListener('click', addScore);
 
 //Timer section
-const tickingTimer = () => {
-    if (gameTime >= 0) {
-        timer.innerHTML = `:${gameTime}`;
-        gameTime--;
-    } else {
-        clearInterval(tickingTimer);
-        quiz.endPage();
-    }
-}
+
 
 // const quizTimer = setInterval(tickingTimer, 1000);
 //This has to run to assign it to the variable
