@@ -102,6 +102,7 @@ class Quiz {
 
     endPage = () => {
         this.stopTimer();
+        gameTime = 30;
         // removeEventListener(this.checkForCorrectAnswer);
         quizSection.style.display = "none";
         endPageDisplay.style.display = "flex";
@@ -144,7 +145,7 @@ class Quiz {
 
 const quiz = new Quiz();
 
-let gameTime = 300;
+let gameTime = 30;
 let quizTimer;
 const quizSection = document.getElementById("section");
 const startGameButton = document.querySelector("#start-game-button");
