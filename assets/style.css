@@ -41,13 +41,14 @@ button p {
 #home-page h1 {
     font-size: 30px;
     text-align: center;
-    width: 25%;
+    min-width: 100px;
     border-bottom: solid 2px green;
 }
 
 #home-page p {
     color: black;
-    font-size: 20px;;
+    font-size: 20px;
+    text-align: center;
 }
 
 #start-game-button, #high-scores-button {
@@ -75,11 +76,10 @@ button p {
     margin: 0 auto;
     margin-top: 30px;
     padding-bottom: 40px;
-    width: 700px;
+    width: 55%;
     height: 400px;
     justify-content: space-around;
     box-shadow: -5px -5px 5px 5px turquoise;
-
 }
 
 #title {
@@ -129,7 +129,7 @@ button p {
     display: inline-block;
     margin-top: -20px;
     margin-bottom: -5px;
-    color: white;
+    color: purple;
 }
 
 /* High Scores section */
@@ -184,7 +184,6 @@ button p {
     display: none;
     flex-direction: column;
     text-align: center;
-    /* color: white; */
 }
 
 #end-page h1 {
@@ -209,3 +208,48 @@ button p {
     display: flex;
     flex-direction: column;
 }
+
+#name {
+    border-radius: 5px;
+    outline: 1px solid lightblue;
+}
+
+#name:focus {
+    box-shadow: 0 0 10px lightblue;
+}
+
+/* Media Queries */
+
+/* HOME PAGE */
+/* At 1050px, move the buttons up a bit */
+@media screen and (max-width: 1050px) {
+    #start-game-button, #high-scores-button {
+        top: 50px;
+        font-size: 20px;
+    }
+}
+
+/* Moving the h1 lower at 800px */
+@media screen and (max-width: 800px) {
+    #home-page h1 {
+        position: relative;
+        top: 20px;
+    }
+}
+
+/* Moving the h1 lower at 650px; */
+@media screen and (max-width: 650px) {
+    #home-page h1 {
+        position: relative;
+        top: 30px;
+    }
+    /* Making the buttons slightly longer so the text don't overflow */
+    #start-game-button, #high-scores-button {
+        width: 30%;
+    }
+}
+
+
+
+
+
