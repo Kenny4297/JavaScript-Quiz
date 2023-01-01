@@ -82,7 +82,6 @@ const listenForUserSelection = () => {
 
 //Checks to see if the user selected the correct answer
 const checkForCorrectAnswer = (event) => {
-    console.log("'Check for correct answer' function check")
     if (event.target.textContent === questions[count].rightAnswer) {
         count++
         score += 10
@@ -101,10 +100,8 @@ const checkForCorrectAnswer = (event) => {
         rightOrWrong.style.display = 'block';
         rightOrWrong.style.color = "red"
         rightOrWrong.innerText = "Wrong! -10 seconds!";
-        // event.target.style.backgroundColor = "darkred";
         gameTime -= 10;
         setTimeout(() => {
-            // event.target.style.backgroundColor = "purple";
             if (count === 5) {
                 return endPage();
             }
