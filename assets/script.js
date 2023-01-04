@@ -162,9 +162,7 @@ const stopTimer = () => {
 //Writes to the high scores 
 const setUpHighScores = () => {
     document.getElementById("high-scores-list1").innerText = `1) ${localStorageHighScores[0].playerName} : ${localStorageHighScores[0].finalScore}`
-    
     document.getElementById("high-scores-list2").innerText = `2) ${localStorageHighScores[1].playerName} : ${localStorageHighScores[1].finalScore}`
-    
     document.getElementById("high-scores-list3").innerText = `3) ${localStorageHighScores[2].playerName} : ${localStorageHighScores[2].finalScore}`
 }
 
@@ -229,8 +227,6 @@ const addScore = (event) => {
 
     setUpHighScores();
 }
-
-
 
 startGameButton.addEventListener('click', (event) => {
     count = 0;
