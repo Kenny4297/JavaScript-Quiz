@@ -1,3 +1,5 @@
+//Branch test: This should only be here in the HTML to JS section
+
 questions = [
     {
         question: "In what decade was Javascript invented?",
@@ -34,12 +36,49 @@ questions = [
 let gameTime = 59;
 let quizTimer;
 
+//Creating each section in JS
+let body = document.body;
+
+//Start with the "home-page"
+const homePageSection = document.createElement("section");
+homePageSection.setAttribute("id", "home-page");
+body.appendChild(homePageSection);
+
+//The child elements of the 'home-page'
+const homeH1 = document.createElement("h1");
+homeH1.setAttribute("id", "home-h1");
+homeH1.innerText = `Javascript Quiz!`;
+homePageSection.appendChild(homeH1);
+
+//The first paragraph on the first page
+const firstParagraphHomePage =  document.createElement("p");
+firstParagraphHomePage.setAttribute("id", "first-paragraph-home-page");
+firstParagraphHomePage.innerText = 'Welcome to the Ultimate JavaScript quiz! Can you answer five questions regarding JavaScript within 60 seconds?';
+homePageSection.appendChild(firstParagraphHomePage);
+
+//The second paragraph for the first page
+const secondParagraphHomePage =  document.createElement("p");
+secondParagraphHomePage.setAttribute("id", "second-paragraph-home-page");
+secondParagraphHomePage.innerText = 'Any incorrect answers will doc your score by 10 seconds, so think carefully!';
+homePageSection.appendChild(secondParagraphHomePage);
+
+//The two buttons for the home page
+const startGameButton = document.createElement("button");
+startGameButton.setAttribute("id", "start-game-button");
+startGameButton.innerText = "Start Game";
+homePageSection.appendChild(startGameButton);
+
+const highScoresButton = document.createElement("button");
+highScoresButton.setAttribute("id", "high-scores-button");
+highScoresButton.innerText = "High Scores";
+homePageSection.appendChild(highScoresButton)
+
 //DOM elements being used
 const quizSection = document.getElementById("section");
-const startGameButton = document.getElementById("start-game-button");
-const homePageSection = document.getElementById("home-page");
+// const startGameButton = document.getElementById("start-game-button");
+// const homePageSection = document.getElementById("home-page");
 const highScoresPage = document.getElementById("high-scores");
-const highScoresButton = document.getElementById("high-scores-button");
+// const highScoresButton = document.getElementById("high-scores-button");
 const scoreDisplay = document.getElementById("score");
 const endPageDisplay = document.getElementById("end-page");
 const rightOrWrong = document.getElementById("right-or-wrong");
