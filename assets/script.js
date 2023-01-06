@@ -30,8 +30,10 @@ questions = [
     },
 ]
 
-//The parameters for the quiz time
+//The parameters for the quiz
 let gameTime = 59;
+count = 0;
+score = 0;
 let quizTimer;
 
 //Creating each section in JS
@@ -85,9 +87,10 @@ quizSection.appendChild(titleOfQUestion);
 //Timer part
 let tickingTimerOnQuiz = document.createElement("h4");
 tickingTimerOnQuiz.setAttribute("id", "timer");
+tickingTimerOnQuiz.innerText = ":60"
 quizSection.appendChild(tickingTimerOnQuiz);
 
-//Choice section
+//Creating the element for each question
 let q1 = document.createElement("button");
 q1.setAttribute("id", "q1");
 q1.setAttribute("class", "button");
@@ -108,6 +111,7 @@ q4.setAttribute("id", "q4");
 q4.setAttribute("class", "button");
 quizSection.appendChild(q4);
 
+//Letting the user know if they were right or wrong
 let scoreDisplay = document.createElement("p");
 scoreDisplay.setAttribute("id", "score");
 quizSection.appendChild(scoreDisplay);
@@ -116,27 +120,50 @@ let rightOrWrong = document.createElement("p");
 rightOrWrong.setAttribute("id", "right-or-wrong");
 quizSection.appendChild(rightOrWrong);
 
+//HIGH SCORES PAGE SECTION
+let highScoresPage = document.createElement("section");
+highScoresPage.setAttribute("id", "high-scores");
+body.appendChild(highScoresPage);
 
+//High Score!
+let highScoresTitle = document.createElement("h1");
+highScoresTitle.setAttribute("id", "high-scores-title");
+highScoresTitle.innerText = 'High Scores!';
+highScoresPage.appendChild(highScoresTitle);
 
-//DOM elements being used
-// const quizSection = document.getElementById("section");
-// const startGameButton = document.getElementById("start-game-button");
-// const homePageSection = document.getElementById("home-page");
-const highScoresPage = document.getElementById("high-scores");
-// const highScoresButton = document.getElementById("high-scores-button");
-// const scoreDisplay = document.getElementById("score");
+//High Scores Paragraphs
+let p1 = document.createElement("p");
+p1.setAttribute("id", "high-scores-list1");
+highScoresPage.appendChild(p1);
+
+let p2 = document.createElement("p");
+p2.setAttribute("id", "high-scores-list2");
+highScoresPage.appendChild(p2);
+
+let p3 = document.createElement("p");
+p3.setAttribute("id", "high-scores-list3");
+highScoresPage.appendChild(p3);
+
+//Buttons for the high scores page
+let goBackButtonPhysical = document.createElement("button");
+goBackButtonPhysical.setAttribute("class", "go-back-button");
+goBackButtonPhysical.innerText = 'Go Back';
+highScoresPage.appendChild(goBackButtonPhysical);
+
+let clearHighScoresButton = document.createElement("button");
+clearHighScoresButton.setAttribute("id", "clear-high-scores");
+clearHighScoresButton.innerText = "Clear high scores";
+highScoresPage.appendChild(clearHighScoresButton);
+
+//DOM elements being used in the HTML
+// const highScoresPage = document.getElementById("high-scores");
 const endPageDisplay = document.getElementById("end-page");
-// const rightOrWrong = document.getElementById("right-or-wrong");
 const finalScore = document.getElementById("finalScore");
 const highScoreSubmitButton = document.getElementById("high-score-submit-button");
 const highScoreRecord = document.getElementById("high-score-record");
 const submitButton = document.getElementById("btn");
 const buttonArray = document.getElementsByClassName("button");
 const goBackButtonArray = Array.from(document.getElementsByClassName("go-back-button"));
-
-//Setting the count and score for the game
-count = 0;
-score = 0;
 
 quizSection.style.display = 'none';
 
@@ -318,6 +345,7 @@ startGameButton.addEventListener('click', (event) => {
     score = 0;
     homePageSection.style.display = "none"
     quizSection.style.display = 'flex';
+
     quizTimer = setInterval(tickingTimer, 1000);
     updateQuestion();
     listenForUserSelection();
@@ -353,25 +381,5 @@ submitButton.addEventListener('click', addScore);
 
 //resets the high scores
 document.getElementById("clear-high-scores").addEventListener('click', resetHighScores);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
