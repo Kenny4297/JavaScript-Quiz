@@ -1,6 +1,6 @@
 questions = [
     {
-        question: "In what decade was JavaScript invented?",
+        question: "In what decade was Javascript invented?",
         answers: ["1980", "1990", "2000", "2020"],
         rightAnswer: "1990"
     },
@@ -33,63 +33,13 @@ questions = [
 //The parameters for the quiz time
 let gameTime = 59;
 let quizTimer;
-//=====================================================================
-//Creating each section in JS
-let body = document.body;
 
-//Start with the "home-page"
-const homePageSection = document.createElement("section");
-homePageSection.setAttribute("id", "home-page");
-body.appendChild(homePageSection);
-
-//The child elements of the 'home-page'
-const homeH1 = document.createElement("h1");
-homeH1.setAttribute("id", "home-h1");
-homeH1.innerText = `Javascript Quiz!`;
-homePageSection.appendChild(homeH1);
-
-//The first paragraph on the first page
-const firstParagraphHomePage =  document.createElement("p");
-firstParagraphHomePage.setAttribute("id", "first-paragraph-home-page");
-firstParagraphHomePage.innerText = 'Welcome to the Ultimate JavaScript quiz! Can you answer five questions regarding JavaScript within 60 seconds?';
-homePageSection.appendChild(firstParagraphHomePage);
-
-//The second paragraph for the first page
-const secondParagraphHomePage =  document.createElement("p");
-secondParagraphHomePage.setAttribute("id", "second-paragraph-home-page");
-secondParagraphHomePage.innerText = 'Any incorrect answers will doc your score by 10 seconds, so think carefully!';
-homePageSection.appendChild(secondParagraphHomePage);
-
-//The two buttons for the home page
-const startGameButton = document.createElement("button");
-startGameButton.setAttribute("id", "start-game-button");
-startGameButton.innerText = "Start Game";
-homePageSection.appendChild(startGameButton);
-
-const highScoresButton = document.createElement("button");
-highScoresButton.setAttribute("id", "high-scores-button");
-highScoresButton.innerText = "High Scores";
-homePageSection.appendChild(highScoresButton);
-
-//Creating the main quiz section
-const quizSection = document.createElement("section");
-quizSection.setAttribute("id", "section");
-body.appendChild(quizSection);
-//The title of each question
-const quizTitle = document.createElement("h1");
-quizTitle.setAttribute("id", "title");
-quizSection.appendChild(quizTitle);
-
-
-
-
-// ===================================================================
 //DOM elements being used
-// const quizSection = document.getElementById("section");
-// const startGameButton = document.getElementById("start-game-button");
-// const homePageSection = document.getElementById("home-page");
+const quizSection = document.getElementById("section");
+const startGameButton = document.getElementById("start-game-button");
+const homePageSection = document.getElementById("home-page");
 const highScoresPage = document.getElementById("high-scores");
-// const highScoresButton = document.getElementById("high-scores-button");
+const highScoresButton = document.getElementById("high-scores-button");
 const scoreDisplay = document.getElementById("score");
 const endPageDisplay = document.getElementById("end-page");
 const rightOrWrong = document.getElementById("right-or-wrong");
@@ -115,32 +65,12 @@ const updateQuestion = () => {
     scoreDisplay.style.color = "purple";
     scoreDisplay.innerText = `Current score: ${score}`;
 
-    //Create the question title
-    const quizTitle = document.createElement("h1");
-    quizTitle.setAttribute("id", "title");
-    quizTitle.innerText = questions[count].question;
-    quizSection.appendChild(quizTitle);
-    // title.innerText = questions[count].question;
+    title.innerText = questions[count].question;
 
-    //Create the buttons for each question option
-    // let q1 = document.createElement("button");
-    // q1.setAttribute("id", "q1");
-    // q1.setAttribute("class", "button");
-    // q1.innerText = questions[count].answers[0];
-    // quizSection.appendChild(q1);
-
-    let question = [];
-    for (let i = 1; i < 5; i++) {
-        question[i] = document.createElement("button");
-        question[i].setAttribute("id", `q${i}`);
-        question[i].setAttribute("class", "button");
-        question[i].innerText = questions[count].answers[i-1];
-        quizSection.appendChild(question[i]);
-    }
-    // q1.innerText = questions[count].answers[0]
-    // q2.innerText = questions[count].answers[1]
-    // q3.innerText = questions[count].answers[2]
-    // q4.innerText = questions[count].answers[3]
+    q1.innerText = questions[count].answers[0]
+    q2.innerText = questions[count].answers[1]
+    q3.innerText = questions[count].answers[2]
+    q4.innerText = questions[count].answers[3]
 };
 
 //Displays the next question in the array
@@ -152,7 +82,6 @@ const listenForUserSelection = () => {
 
 //Checks to see if the user selected the correct answer
 const checkForCorrectAnswer = (event) => {
-    console.log("CheckForCorrectAnswer firing")
     if (event.target.textContent === questions[count].rightAnswer) {
         count++
         score += 10
@@ -227,7 +156,7 @@ const startTimer = () => {
 
 //stops the timer
 const stopTimer = () => {
-    document.getElementById("timer").innerText = `Begin!`;
+    document.getElementById("timer").innerText = `:60`;
     clearInterval(quizTimer);
 }
 
