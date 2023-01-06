@@ -71,17 +71,62 @@ highScoresButton.setAttribute("id", "high-scores-button");
 highScoresButton.innerText = "High Scores";
 homePageSection.appendChild(highScoresButton)
 
+//QUIZ SECTION HERE
+const quizSection = document.createElement("section");
+quizSection.setAttribute("id", "section");
+body.appendChild(quizSection);
+console.log(quizSection);
+
+//Title of question
+const titleOfQUestion = document.createElement("h1");
+titleOfQUestion.setAttribute("id", "title");
+quizSection.appendChild(titleOfQUestion);
+
+//Timer part
+let tickingTimerOnQuiz = document.createElement("h4");
+tickingTimerOnQuiz.setAttribute("id", "timer");
+quizSection.appendChild(tickingTimerOnQuiz);
+
+//Choice section
+let q1 = document.createElement("button");
+q1.setAttribute("id", "q1");
+q1.setAttribute("class", "button");
+quizSection.appendChild(q1);
+
+let q2 = document.createElement("button");
+q2.setAttribute("id", "q2");
+q2.setAttribute("class", "button");
+quizSection.appendChild(q2);
+
+let q3 = document.createElement("button");
+q3.setAttribute("id", "q3");
+q3.setAttribute("class", "button");
+quizSection.appendChild(q3);
+
+let q4 = document.createElement("button");
+q4.setAttribute("id", "q4");
+q4.setAttribute("class", "button");
+quizSection.appendChild(q4);
+
+let scoreDisplay = document.createElement("p");
+scoreDisplay.setAttribute("id", "score");
+quizSection.appendChild(scoreDisplay);
+
+let rightOrWrong = document.createElement("p");
+rightOrWrong.setAttribute("id", "right-or-wrong");
+quizSection.appendChild(rightOrWrong);
+
 
 
 //DOM elements being used
-const quizSection = document.getElementById("section");
+// const quizSection = document.getElementById("section");
 // const startGameButton = document.getElementById("start-game-button");
 // const homePageSection = document.getElementById("home-page");
 const highScoresPage = document.getElementById("high-scores");
 // const highScoresButton = document.getElementById("high-scores-button");
-const scoreDisplay = document.getElementById("score");
+// const scoreDisplay = document.getElementById("score");
 const endPageDisplay = document.getElementById("end-page");
-const rightOrWrong = document.getElementById("right-or-wrong");
+// const rightOrWrong = document.getElementById("right-or-wrong");
 const finalScore = document.getElementById("finalScore");
 const highScoreSubmitButton = document.getElementById("high-score-submit-button");
 const highScoreRecord = document.getElementById("high-score-record");
