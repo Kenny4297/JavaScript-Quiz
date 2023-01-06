@@ -1,5 +1,3 @@
-//Branch test: This should only be here in the HTML to JS section
-
 questions = [
     {
         question: "In what decade was Javascript invented?",
@@ -72,6 +70,8 @@ const highScoresButton = document.createElement("button");
 highScoresButton.setAttribute("id", "high-scores-button");
 highScoresButton.innerText = "High Scores";
 homePageSection.appendChild(highScoresButton)
+
+
 
 //DOM elements being used
 const quizSection = document.getElementById("section");
