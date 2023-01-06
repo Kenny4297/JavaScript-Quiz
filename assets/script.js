@@ -156,6 +156,7 @@ const startTimer = () => {
 
 //stops the timer
 const stopTimer = () => {
+    document.getElementById("timer").innerText = `Begin!`;
     clearInterval(quizTimer);
 }
 
