@@ -39,7 +39,7 @@ let quizTimer;
 //Creating each section in JS
 let body = document.body;
 
-//Start with the "home-page"
+//==========HOME PAGE SECTION==========
 const homePageSection = document.createElement("section");
 homePageSection.setAttribute("id", "home-page");
 body.appendChild(homePageSection);
@@ -73,7 +73,7 @@ highScoresButton.setAttribute("id", "high-scores-button");
 highScoresButton.innerText = "High Scores";
 homePageSection.appendChild(highScoresButton)
 
-//QUIZ SECTION HERE
+//==========QUIZ SECTION==========
 const quizSection = document.createElement("section");
 quizSection.setAttribute("id", "section");
 body.appendChild(quizSection);
@@ -120,7 +120,7 @@ let rightOrWrong = document.createElement("p");
 rightOrWrong.setAttribute("id", "right-or-wrong");
 quizSection.appendChild(rightOrWrong);
 
-//HIGH SCORES PAGE SECTION
+//==========HIGH SCORES PAGE==========
 let highScoresPage = document.createElement("section");
 highScoresPage.setAttribute("id", "high-scores");
 body.appendChild(highScoresPage);
@@ -156,7 +156,6 @@ clearHighScoresButton.innerText = "Clear high scores";
 highScoresPage.appendChild(clearHighScoresButton);
 
 //DOM elements being used in the HTML
-// const highScoresPage = document.getElementById("high-scores");
 const endPageDisplay = document.getElementById("end-page");
 const finalScore = document.getElementById("finalScore");
 const highScoreSubmitButton = document.getElementById("high-score-submit-button");
@@ -167,6 +166,7 @@ const goBackButtonArray = Array.from(document.getElementsByClassName("go-back-bu
 
 quizSection.style.display = 'none';
 
+//==========FUNCTIONS==========
 //Updates the next question from the above array
 const updateQuestion = () => {
     if (count === 5 ) {
@@ -265,7 +265,7 @@ const startTimer = () => {
     quizTimer;
 }
 
-//stops the timer
+//Stops the timer
 const stopTimer = () => {
     document.getElementById("timer").innerText = `:60`;
     clearInterval(quizTimer);
