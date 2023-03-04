@@ -1,4 +1,4 @@
-# Ked's Tap Dancing JavaScript Quiz Extravaganza
+# JavaScript Quiz
 
 ## What is this project?
 This is a JavaScript Quiz that tests the clients knowledge on some of the fundaments of JavaScript.
@@ -16,3 +16,5 @@ The following is a link to the GitPages site:
 The following is a screen shot of the final product:
 ![Screenshot](./assets/images/javascriptquizscreenshot.png)
 
+# Troubleshooting Discoveries
+* See the google docs on this called "JavaScript Quiz Documentation (bootcamp)"

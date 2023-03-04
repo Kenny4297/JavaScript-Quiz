@@ -324,7 +324,7 @@ const addScore = (event) => {
 
     localStorageHighScores.push(playerScore);
     // highScores.push(playerScore);
-    console.log(localStorageHighScores);
+    // console.log(localStorageHighScores);
 
     //Making sure the array is sorted
     localStorageHighScores.sort( (a, b) => {
