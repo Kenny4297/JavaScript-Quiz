@@ -249,6 +249,22 @@ button p {
     }
 }
 
+@media (max-width: 500px) {
+    #start-game-button, #high-scores-button {
+        width: 10rem;
+    }
+}
+
+@media (max-width: 563px) {
+    #clear-high-scores {
+        width: 10rem;
+    }
+    .go-back-button {
+        position: relative;
+        bottom: 4rem;
+        width: 10rem;
+    }
+}
 
 
 
