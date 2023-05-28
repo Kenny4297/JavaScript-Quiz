@@ -281,7 +281,7 @@ const setUpHighScores = () => {
 //Sets the dummy scores
 const setDummyScore = () => {
     let dummyScore = {
-        playerName: "loser",
+        playerName: "Ked",
         finalScore: 0
     }
     
