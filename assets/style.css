@@ -1,12 +1,20 @@
 /* The background for the entire project */
 
 body {
-    background-color: lightblue;
+    background: linear-gradient(to right, #ADD8E6, #E0F0FF);
     color: white;
 }
 
+:root {
+    --light-blue: #ADD8E6;
+    --medium-blue: #87CEFA;
+    --medium-green:  #20B2AA;
+    --dark-green: #008B8B;
+    --dark-blue: #483D8B;
+}
+
 section {
-    background-color: lightgrey;
+    background: linear-gradient(to left, #87CEFA, #B0E2FF);
     color: black;
 }
 
@@ -27,7 +35,7 @@ button p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    box-shadow: -5px -5px 5px 5px green;
+    box-shadow: -5px -5px 5px 5px var(--dark-blue);
     padding-left: 20px;
     padding-right: 20px;
     padding-bottom: 100px;
@@ -119,10 +127,10 @@ button p {
     position: absolute;
     top: 400px;
     font-style: italic;
+    font-weight: 900;
     font-size: 20px;
     color: blue;
     display: none;
-    font-weight: bold;
 }
 
 #timer {
